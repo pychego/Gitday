@@ -37,7 +37,7 @@ git reset --hard <commit id>     ; 回到指定版本
 ```
 
 ```
-git checkout -- file             ; 丢弃工作区的修改
+git checkout -- <file>             ; 丢弃工作区的修改
 ```
 
 该命令让文件回到最近一次commit或add的状态
@@ -273,3 +273,5 @@ git merge <branch name> 将指定分支的修改归并到当前分支
 cat <file>  查看文件内容
 
 git diff   查看文件更改的地方
+
+rm  <file> 删除文件
