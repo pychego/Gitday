@@ -1,3 +1,13 @@
+#### **名词解释**
+
+Working Directory  工作区，即目录
+
+Repository  版本库，仓库
+
+
+
+
+
 #### **基础操作**
 
 modified  改动过的
