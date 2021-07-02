@@ -7,7 +7,6 @@ Discrad  丢弃
 Reinstate  使恢复原状
 
 Revert 恢复
-Revert 恢复
 
 Matlib ================
 
