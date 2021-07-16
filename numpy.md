@@ -7,6 +7,8 @@ np.array(object, dtype=None)   #传入数组参数，创建数组对象
 np.arange(start, stop, step, dtype=None)
 #左闭右开，仅stop为必须参数
 np.random.rand(obj)  #创建0～1随机数的数组
+#randn()函数创建的数组元素是符合标准正态分布的随机数
+#randint(start, stop, size=count)函数创建的指定范围内的随机整数
 ```
 
 ### **属性**
