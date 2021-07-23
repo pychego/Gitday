@@ -19,12 +19,25 @@
 
 ## **读取、保存数据**
 
+```
+#显示所有列
+pd.set_option('display.max_columns', None)
+#显示所有行
+pd.set_option('display.max_rows', None)
+#设置value的显示长度为100，默认为50
+pd.set_option('max_colwidth',100)
+```
+
+
+
 - 读取Excel、csv工作簿数据
 
   ```python
-  df = pd.read_excel('xxx.xlsx', sheet_name=None, header=0, index_col=None)
+  df = pd.read_excel('xxx.xlsx', sheet_name=None, header=0, index_col=None, usecols=)
+  #usecols 默认解析所有列，可以传入由列索引组成的数组，解析指定列
   #header=0表示使用数据表的第0行内容作为列标签
   #index_col=0表示使用数据表的第0列内容作为行标签，默认为None
+  #当有多个sheet时，指定None读入所有
   df = pd.read_csv('xxx.csv')
   ```
 
@@ -33,6 +46,7 @@
   ```python
   df.index
   df.columns
+  df.count()   
   ```
 
 - 读取指定列
@@ -47,7 +61,7 @@
   df.head()       #head()不含参数表示读取前5行，带参数100表示读取100行
   df.tail()       #读取最后5行
   df.shape        #返回数据行列数元组
-  df.indo()       #查看数据类型，每一列有多少NaN，较全面
+  df.info()       #查看数据类型，每一列有多少NaN，较全面
   ```
 
 - 转换特定列的数据类型
@@ -115,11 +129,10 @@ iloc和loc后面只有一个数时，都是选择的某一行的数据
 
 ### 修改行标签和列标签
 
-(比较鸡肋)
-
 ```
 df.set_index('学号')         #将'学号'作为行标签
-df = df.rename(column={'原行标签': '新标签'...})
+df = df.rename(column={'原行标签': '新标签'...}, inplace=True)
+#inplace=True 代表直接修改原对象
 ```
 
 ---
@@ -272,9 +285,24 @@ dataframe.apply(function,axis)对一行或一列做出一些操作（axis=1遍�
 
    表格在行列方向上均有索引（类似于DataFrame），花括号结构只有“列方向”上的索引（类似于层次化的Series），结构更加偏向于堆叠（Series-stack，方便记忆）。stack函数会将数据从”表格结构“变成”花括号结构“，即将其行索引变成列索引，反之，unstack函数将数据从”花括号结构“变成”表格结构“，即要将其中一层的列索引变成行索引。
 
-2. pd.pivot_table()
+2. pd.pivot_table()  （功能和groupby可以相互取代）参考csdn收藏
+
+   ```
+   pd.pivot_table(df, index=, aggfunc='mean', values=, columns)
+   ```
+
+   df: DataFrame对象
+
+   index：可以接受一个列表作为多级索引，如果要显示所有的文本列，就要把他们的列索引全部写进去
+
+   aggfunc：默认是mean(), 可以接受列表传入多个函数
+
+   values：整理之后的列索引
+
+   columns：接受参数：原来的列索引，将该列的值去重之后作为第二级列索引
 
 
 
+## 易错知识点
 
-
+1. data是只有一列数据（加权成绩）的DataFrame对象，data和data['加权成绩']是不一样的，后者是Series

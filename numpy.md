@@ -9,6 +9,10 @@ np.arange(start, stop, step, dtype=None)
 np.random.rand(obj)  #创建0～1随机数的数组
 #randn()函数创建的数组元素是符合标准正态分布的随机数
 #randint(start, stop, size=count)函数创建的指定范围内的随机整数
+numpy.random.normal(loc=0,scale=1e-2,size=shape) 
+#参数loc(float)：正态分布的均值，对应着这个分布的中心。loc=0说明这一个以Y轴为对称轴的正态分布，
+#参数scale(float)：正态分布的标准差，对应分布的宽度，scale越大，正态分布的曲线越矮胖，scale越小，曲线越高瘦。
+#参数size(int 或者整数元组)：输出的值赋在shape里，默认为None。
 ```
 
 ### **属性**

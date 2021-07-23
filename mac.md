@@ -14,4 +14,13 @@
 
 conda安装的是python3.8，自己安装的是3.9，which python 可以查看安装位置
 
+最最简单的方法查看库安装的位置
+
+```
+import pandas
+print(pandas)
+```
+
+
+
 3. shift + command + . 显示隐藏文件夹
