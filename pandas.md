@@ -102,6 +102,14 @@
   ```
   data.iloc[1:5, 1:5]           #切片也可以由行列号数组替换
   ```
+  
+- 查看不同专业人数
+
+- ```
+  df['专业'].count_values()
+  ```
+
+  
 
 ### 修改行标签和列标签
 
@@ -116,6 +124,180 @@ data = data.rename(column={'原行标签': '新标签'...})
 
 ## **高级用法**
 
+<<<<<<< HEAD
+=======
+### 数据的查找替换
+
+1. len(df)可以查看一共多少条数据
+
+- isin()函数可以查看DataFrame是否包含某个值，返回True，False组成的数组
+
+  也可以用来直观查找数据
+
+  ```
+  df[data['毕业中学'].isin('原阳县第一高级中学'])
+  ```
+
+#### 替换修改
+
+dataframe.apply(function,axis)对一行或一列做出一些操作（axis=1遍历行，axis=0遍历列），可以用匿名函数
+
+- 一对一替换
+
+  ```python
+  	df.replace('原内容', '新内容')
+  	#该操作不改变df，而是生成新的对象；将replace()参数inplace=True则改变df
+  ```
+
+- 多对一替换
+
+  ```python
+  df.replace(['原1'，'原2'], '新1')   #将原1、原2都替换成新1
+  ```
+
+- 多对多替换
+
+  ```python
+  df.replace({'原1': '新1', '原2': '新2'})
+  ```
+
+### **数据的处理修改**
+
+- 按条件修改
+
+  可以按这个方法把脱敏的学号再变回原来的
+
+  ```
+  df[df > 0] = -df  #把所有的正数变成相反数
+  ```
+
+  
+
+- 插入数据
+
+  ```
+  #插入列数据(也可以直接赋值)
+  df.insert(2, '列名'， ['元素1'，..])
+  df['列名'] = ['元素1'，..]
+  ```
+
+- 删除数据（使用drop()方法删除，必须指定要删除的行/列索引）
+
+  `pandas`模块的drop()函数既可以删除指定的行，也可以删除指定的行，注意不改变原对象，而是返回新对象
+
+  ```python
+  df.drop(['列名1','列名2'], axis=1)   #axis=1处理列，axis=0处理行
+  df.drop(df.columns[[2,5]], axis=1)
+  df.drop(columns=['列名1', '列名2'])
+  #三者功能相同，axis用于指定第一个参数给出的是行标签还是列标签
+  #删除行时，axis参数可以省略
+  df.drop(index=['行号1', '行号2'])
+  #更实用的方法，删除满足条件元素所在的行
+  df = df.drop(df[<some boolean condition>].index)
+  df = df.drop(df[df['专业'] == '航空航天类'].index)
+  ```
+
+  df.drop(self, *labels=None*, *axis=0|1*, *index=None, columns=None*, *level=None,* *inplace=False|True, errors='raise| ignore'*)
+
+  labels : 列名称 或者 行|列索引号
+
+  labels, axis=0 等价于 index=labels ;
+
+  labels, axis=1 等价于 columns=labels
+
+  *inplace=False|True* : 是否替代原来的df, 默认False(不替代)
+
+  *errors='raise| ignore' :* 是否忽略错误, 默认raise(报错), ignore为跳过错误继续运行
+
+  *level* 用于多重index,第几层
+
+- 处理缺失值
+
+  在python/pandas中，缺失值一般用NaN表示
+
+  1. 删除缺失值，dropna()函数可以删除表中含有缺失值的行，默认只要有缺失值，就删除整行；
+
+     参数设置为how='any'只删除整行都为缺失值的行
+
+  2. 填充缺失值
+
+     ```
+     df.fillna(value=0)     #将缺失值填充为0
+     df.fillna({'列名1':0, '列名2':1})    #不同列填充不同的值
+     ```
+
+- 处理重复值
+
+  1. 删除重复行
+
+     ```python
+     df.drop_duplicates()       #删除完全重复的行
+     df.drop_duplicates(subset='列名1')    #删除某一列的重复值
+     #参数keep指定为'first',保留第一个重复值；为'last',保存最后一个重复值
+     #为False，删除所有重复值
+     
+     ```
+     
+  2. 获取唯一值
+
+     ```
+     df['列名1'].unique()              #获取指定列数据的唯一值
+     ```
+  
+- 排序函数
+
+  ```
+  #按axis排序
+  df.sort_index(axis=1, ascending=False)  
+  #按值排序
+  df.sort_values(by='列名1', ascending=True)   #升序或者降序
+  ```
+
+- 数据表的拼接
+
+  1. 根据公共列拼接**两个**DataFrame对象,不能一次拼接三个对象
+
+     ```
+     a = pd.merge(df1, df2, how=, on='列名')   
+     #how='outer'可以指定两表取并集
+     #on参数指定合并依据的列，两对象只有一个相同列是不用指出
+     ```
+
+  2. 直接在一个表的后面追加表格
+
+     ```
+     e = pd.concat([data1, df2], ignore_index=True)
+     #参数为True表示将两个表的行标签合在一起
+     f = df.append(df2, ignore_index=)
+     ```
+
+- 统计计算(参数为1时，进行另一个轴的统计计算)
+
+  ```
+  df['列名'].sum()
+  df['列名'].mean()
+  df['列名'].max()
+  df['列名'].min()
+  df.describe()   #获取数据的个数，均值，最值，方差等
+  df.corr()       #计算各列之间的相关系数
+  ```
+
+  
+
+### 数据透视表
+
+1. 堆叠
+
+   表格在行列方向上均有索引（类似于DataFrame），花括号结构只有“列方向”上的索引（类似于层次化的Series），结构更加偏向于堆叠（Series-stack，方便记忆）。stack函数会将数据从”表格结构“变成”花括号结构“，即将其行索引变成列索引，反之，unstack函数将数据从”花括号结构“变成”表格结构“，即要将其中一层的列索引变成行索引。
+
+2. pd.pivot_table()  （功能和groupby可以相互取代）参考csdn收藏
+
+   ```
+   pd.pivot_table(df, index=, aggfunc='mean', values=, columns)
+   ```
+
+   df: DataFrame对象
+>>>>>>> f6a3fcf (new)
 
 
 
