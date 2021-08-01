@@ -11,7 +11,9 @@ Servo myservo;//实例化舵机
 #define MIDDLE_ANGLE 80//设置舵机中位（平衡）角度
 #define WINDOW 7//设置平均数窗口大小
 
-int flag = 1;
+#define IR_Rev A1//红外接收IO
+
+int flag = 0;
 void setup() {
   // put your setup code here, to run once:
   carInit();//电机初始化
@@ -22,16 +24,23 @@ void setup() {
   SR04_Init();//超声测距模块初始化
   myservo.attach(SERVO);       // 选择控制的舵机的IO
   myservo.write(MIDDLE_ANGLE); // 指定舵机转向的角度
+
+  pinMode(IR_Rev,INPUT);//设置红外光敏二极管所在IO输入
   
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  
-  if(flag == 1)
+  int irRev;
+  irRev=analogRead(IR_Rev);
+  if(flag == 0 && irRev > 50){
+    flag = 1;
+   }
+  else if(flag == 1)
   {
     track();
-  }else if(flag ==2)
+  }
+  else if(flag ==2)
   {
      light_seeking();
     }
