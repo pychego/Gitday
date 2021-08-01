@@ -126,6 +126,14 @@ iloc和loc后面只有一个数时，都是选择的某一行的数据
   ```
   df.iloc[1:5, 1:5]           #切片也可以由行列号数组替换
   ```
+  
+- 查看不同专业人数
+
+- ```
+  df['专业'].count_values()
+  ```
+
+  
 
 ### 修改行标签和列标签
 
@@ -194,18 +202,35 @@ dataframe.apply(function,axis)对一行或一列做出一些操作（axis=1遍�
   df['列名'] = ['元素1'，..]
   ```
 
-- 删除数据
+- 删除数据（使用drop()方法删除，必须指定要删除的行/列索引）
 
   `pandas`模块的drop()函数既可以删除指定的行，也可以删除指定的行，注意不改变原对象，而是返回新对象
 
   ```python
-  df.drop(['列名1','列名2'], axis=1)
+  df.drop(['列名1','列名2'], axis=1)   #axis=1处理列，axis=0处理行
   df.drop(df.columns[[2,5]], axis=1)
   df.drop(columns=['列名1', '列名2'])
   #三者功能相同，axis用于指定第一个参数给出的是行标签还是列标签
   #删除行时，axis参数可以省略
   df.drop(index=['行号1', '行号2'])
+  #更实用的方法，删除满足条件元素所在的行
+  df = df.drop(df[<some boolean condition>].index)
+  df = df.drop(df[df['专业'] == '航空航天类'].index)
   ```
+
+  df.drop(self, *labels=None*, *axis=0|1*, *index=None, columns=None*, *level=None,* *inplace=False|True, errors='raise| ignore'*)
+
+  labels : 列名称 或者 行|列索引号
+
+  labels, axis=0 等价于 index=labels ;
+
+  labels, axis=1 等价于 columns=labels
+
+  *inplace=False|True* : 是否替代原来的df, 默认False(不替代)
+
+  *errors='raise| ignore' :* 是否忽略错误, 默认raise(报错), ignore为跳过错误继续运行
+
+  *level* 用于多重index,第几层
 
 - 处理缺失值
 
@@ -231,14 +256,15 @@ dataframe.apply(function,axis)对一行或一列做出一些操作（axis=1遍�
      df.drop_duplicates(subset='列名1')    #删除某一列的重复值
      #参数keep指定为'first',保留第一个重复值；为'last',保存最后一个重复值
      #为False，删除所有重复值
+     
      ```
-
+     
   2. 获取唯一值
 
      ```
      df['列名1'].unique()              #获取指定列数据的唯一值
      ```
-
+  
 - 排序函数
 
   ```
@@ -250,7 +276,7 @@ dataframe.apply(function,axis)对一行或一列做出一些操作（axis=1遍�
 
 - 数据表的拼接
 
-  1. 根据公共列拼接两个DataFrame对象
+  1. 根据公共列拼接**两个**DataFrame对象,不能一次拼接三个对象
 
      ```
      a = pd.merge(df1, df2, how=, on='列名')   
