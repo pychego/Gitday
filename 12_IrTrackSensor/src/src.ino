@@ -33,26 +33,17 @@ void setup() {
   SR04_Init();//超声测距模块初始化
   myservo.attach(SERVO);       // 选择控制的舵机的IO
   myservo.write(MIDDLE_ANGLE); // 指定舵机转向的角度
-<<<<<<< HEAD
-  
-=======
 
   pinMode(IR_Rev, INPUT); //设置红外光敏二极管所在IO输入
 
   pixels.begin();//初始化WS2812 LED
 
->>>>>>> f57626d (i have remove DS)
+
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-<<<<<<< HEAD
-  
-  if(flag == 1)
-  {
-    track();
-  }else if(flag ==2)
-=======
+
   int irRev;
   irRev = analogRead(IR_Rev);
   if (flag == 0 && irRev > 50) {
@@ -65,7 +56,7 @@ void loop() {
     track();
   }
   else if (flag == 2)
->>>>>>> f57626d (i have remove DS)
+
   {
     light_seeking();
   }
