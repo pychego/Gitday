@@ -122,7 +122,7 @@ void led() {
     delay(1000);
     int angleList[90];
     int ap = 0;
-    int halfWindow = (WINDOW - 1) / 2;
+    int halfWindow = (WINDOW - 1) / 2;   //WINDOW 7
     //把要转的角度放入数组
     for (int i = -44; i <= 45; i++)
       angleList[ap++] = i;
@@ -134,7 +134,7 @@ void led() {
       delay(20);//延时给舵机运行的时间
       int ldrRev;
       ldrRev = analogRead(LDR_Rev);
-      lightList[i + halfWindow] = ldrRev;
+      lightList[i + halfWindow] = ldrRev;   // 0 1 2 3～92 93 94 95 
     }
     //为亮度信息数组前后各补充半个窗口的数据
     for (int i = 0; i < halfWindow; i++)
@@ -143,12 +143,13 @@ void led() {
       lightList[90 + WINDOW - 1 - 1 - i] = lightList[90 + WINDOW - 1 - 1 - halfWindow];
     }
     //计算滑动窗口内亮度均值
-    int avgLightList[90];
+    int avgLightList[90];   //这个数组是将直接测量得来的亮度平均一下
     for (int i = halfWindow; i < 90 + halfWindow; i++)
     {
       int sum;
       sum = 0;
       for (int j = i - halfWindow; j <= i + halfWindow; j++)
+      // halfWindow 3  0~6
         sum += lightList[j];
       avgLightList[i - halfWindow] = sum /= WINDOW;
     }
@@ -163,15 +164,16 @@ void led() {
         maxi = i;
       }
     int lightAngle = angleList[maxi];
+    //如果maxi为45，那么这个值就是0左右
     Serial.println(angleList[maxi]);
     char disChar[20];
-    sprintf(disChar, "LA:%d,   ", lightAngle);
-    OLED12864_ShowStr(0, 0, disChar);
+    sprintf(disChar, "LA:%d,   ", lightAngle);  //把后面的打印到字符数组disChar
+    OLED12864_ShowStr(0, 0, disChar);   //在led上面显示
     //判断距离，如果太小就停下
     myservo.write(MIDDLE_ANGLE);
     delay(600);
     float distance = GetDistance(); //调用测距函数
-    static int err_sum = 0;
+    static int err_sum = 0;   //虽然在函数内部，可是却是一个全局变量
     if (distance < 20)
     {
       carMove(0, 0);
