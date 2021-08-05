@@ -16,8 +16,6 @@ legend   [ˈledʒənd] 图例，说明，解释
 
 axis  [ˈæksɪs] 轴
 
-demension  维数
-
 duplicate  [ˈdjuːplɪkeɪt , ˈdjuːplɪkət]  重复值，复制
 
 subset  分组，子集
