@@ -129,6 +129,14 @@ iloc和loc后面只有一个数时，都是选择的某一行的数据
   
 - 查看不同专业人数
 
+
+- ```
+  df['专业'].count_values()
+  ```
+
+  
+
+
 - ```
   df['专业'].count_values()
   ```
@@ -146,7 +154,6 @@ df = df.rename(column={'原行标签': '新标签'...}, inplace=True)
 ---
 
 ## **高级用法**
-
 ### 数据的查找替换
 
 1. len(df)可以查看一共多少条数据
@@ -318,6 +325,7 @@ dataframe.apply(function,axis)对一行或一列做出一些操作（axis=1遍�
    ```
 
    df: DataFrame对象
+
 
    index：可以接受一个列表作为多级索引，如果要显示所有的文本列，就要把他们的列索引全部写进去
 
