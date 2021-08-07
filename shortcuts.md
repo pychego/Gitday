@@ -24,7 +24,7 @@ command + E: 调出最近文件菜单
 
 control + G :可以同时选中多个同名变量进行编辑
 
-command + D: 直接复制粘贴光标所在行
+**command + D: 直接复制粘贴光标所在行**
 
 command + delete: 直接删除光标所在行
 
