@@ -1,10 +1,30 @@
-在shell特定文件夹下面输入该命令显示隐藏文件
+`shift + command + .`在shell特定文件夹下面输入该命令显示隐藏文件
 
-```
-defaults write com.apple.finder AppleShowAllFiles TRUE
+`cd` 改变目录
 
-killall Finder
-```
+`cd ..` 回退到上一个目录
+
+`pwd` 显示当前所在得到目录路径
+
+`ls`  列出当前目录所有文件
+
+`touch` 新建文件
+
+`rm`   删除文件
+
+`mkdir`。新建文件夹
+
+`reset`  重新初始化终端
+
+`clear` 清屏
+
+`history`   查看历史命令
+
+  `help`
+
+`exit`    退出终端
+
+`#`    表示注释
 
 ## pycharm快捷键
 

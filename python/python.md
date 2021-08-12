@@ -146,7 +146,7 @@ Python的循环有两种，**一种是for...in循环**，for i in list，在循�
 
 **可迭代对象**：P334明确说明
 
-**迭代器**：实现了`__iter__`和`__next__`, 自己写的类重构`__iter__`方法应该能够返回迭代器
+**迭代器**：实现了`__iter__`和`__next__`, 自己写的类重构`__iter__`方法应该能够返回迭代器，惰性计算；迭代器只能前进不能后退
 
 `enumerate(iterable, start=0)` 产出由两个元素组成的元组，结构是`(index, item)`, 其中index从start开始计时，item从iterable中获取
 
@@ -361,6 +361,16 @@ self[k]会调用`__getitem__`方法，该方法失败之后会通过`__missing__
 `os.cpu_count()`返回CPU数量
 
 `time.sleep()`参数单位是秒
+
+## 常用包
+
+**tqdm** 
+
+`tqdm.tqdm()`: 接收任意的可迭代对象，生成一个迭代器，使用这个迭代器时，**显示进度条动画**
+
+**collections**
+
+`Counter()` 这个实例可以当作计数器，初始化之后任意键的value均为0，需要时直接`+=`
 
 ## 实用技巧
 
