@@ -1,0 +1,48 @@
+Last login: Thu Aug 12 17:11:19 on ttys001
+(base) chegopy@XueJings-MacBook-Air ~ % cd learngit
+(base) chegopy@XueJings-MacBook-Air learngit % vim .gitignore
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# os system file
+.DS_Store
+
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+
