@@ -150,6 +150,8 @@ Python的循环有两种，**一种是for...in循环**，for i in list，在循�
 
 `enumerate(iterable, start=0)` 产出由两个元素组成的元组，结构是`(index, item)`, 其中index从start开始计时，item从iterable中获取
 
+`return` 在生成器中，表示生成器运行完成了，可以结束了。然后生成器会抛出一个`StopIteration`的异常。(或执行到生成器末尾也会抛出错误)而`for`循环能够检测到这个异常，于是结束循环。在生成器里面的`return`只是一个结束标志，它不会把后面写的值返回给调用者。
+
 ## 函数
 
 函数名其实就是指向一个函数对象的引用，完全可以把函数名赋给一个变量，相当于给这个函数起了一个“别名”：
@@ -352,7 +354,13 @@ self[k]会调用`__getitem__`方法，该方法失败之后会通过`__missing__
 
 当我们使用print(obj)在console上打印对象的时候，实质上调用的是sys.stdout.write(obj+'\n')
 
+## os、sys、time
 
+`os.path.join()`连接两个或更多的路径名
+
+`os.cpu_count()`返回CPU数量
+
+`time.sleep()`参数单位是秒
 
 ## 实用技巧
 
