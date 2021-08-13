@@ -360,6 +360,8 @@ self[k]会调用`__getitem__`方法，该方法失败之后会通过`__missing__
 
 `os.cpu_count()`返回CPU数量
 
+`sys.stdout.flush()`强制其“刷新”缓冲区，这意味着它将把缓冲区中的所有内容都写到终端上
+
 `time.sleep()`参数单位是秒
 
 ## 常用包
@@ -442,3 +444,5 @@ partial [ˈpɑːʃl] 偏的，部分的
 assignment 赋值
 
 predicate  [ˈpredɪkət , ˈpredɪkeɪt]  断言，使基于
+
+async 异步是我
