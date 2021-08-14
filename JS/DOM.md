@@ -190,6 +190,10 @@ node.cloneNode()        //无参数表示浅复制，只复制标签没有内容
 
 3. 当前目标阶段
 
+mouseover 鼠标经过自身盒子以及子盒子都会触发（冒泡）
+
+mouseenter 和 mouseleave 只有经过自身盒子才触发，不冒泡
+
 
 
 ### 事件对象

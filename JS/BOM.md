@@ -71,3 +71,78 @@
 .go(参数)    //参数为1，前进一个页面；为-1，倒退一个页面
 ```
 
+**offset系列**
+
+```javascript
+element.offsetTop.   // 返回以带有定位的父亲为准，否则以body为准；返回值都不带单位
+element.offsetLeft.  
+element.offsetWidth. // 返回元素宽度是 padding + border + width
+element.offsetParent. // 返回带有定位的父亲
+```
+
+offset和style属性的区别
+
+- offset获得任何样式大小，得到的值只读，不可赋值；
+- style仅可得到行内样式表的样式，可读写
+
+**client元素可视区**
+
+```javascript
+element.clientWidth. // 不包含边框，包含padding
+element.clientTop    // 返回元素上边框
+element.clienyHeight 
+```
+
+**立即执行函数**
+
+​	不用调用，立即执行；创建了独立的一个作用域；两种写法
+
+- `(function () {})()`  最后的括号写实参
+- `(function () {} ())`
+
+**元素滚动系列**
+
+```
+element.scrollTop    // 元素被卷去的头部
+scroll   // 滚动条变化触发事件
+window.pageYOffset.  // 页面被卷去的头部
+```
+
+**动画原理**
+
+​	定时器不断移动盒子位置，盒子必有定位，给不同的元素指定不同的定时器
+
+ 缓动动画原理：
+
+​	`step = (目标值 - 当前值) / 10`
+
+​	`step = step > 0 ? Math.ceil(step) : Math.floor(step) ;
+
+
+
+## 移动端
+
+**触屏事件**
+
+​	`touchstart`  开始触摸
+
+​	`touchmove`  在DOM元素上移动
+
+​	`touchend`    手指离开
+
+**触摸事件对象 e**
+
+```javascript
+e.touches   // 获取所有的触摸点（正在触摸）
+e.targetTiuches
+e.changedTouches
+```
+
+
+
+
+
+
+
+
+
