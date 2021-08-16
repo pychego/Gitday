@@ -1,0 +1,1 @@
+java 中integer 和 boolean不相容，不能用integer做条件测试
