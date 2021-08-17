@@ -25,9 +25,13 @@ stage是暂存区
 
 ![git-repo](https://www.liaoxuefeng.com/files/attachments/919020037470528/0)
 
+
+
 =============================
 
 #### **版本操作/管理修改**
+
+> reset 恢复到指定版本
 
 HEAD指针指向当前版本, HEAD^表示上个版本, HEAD^^以此类推
 
@@ -35,6 +39,10 @@ HEAD指针指向当前版本, HEAD^表示上个版本, HEAD^^以此类推
 git reset --hard HEAD^           ; 回退到上个版本
 git reset --hard <commit id>     ; 回到指定版本
 ```
+
+**适用场景：** 如果想恢复到之前某个提交的版本，且那个版本之后提交的版本我们都不要了，就可以用这种方法。
+
+![img](https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTgwNDE0MjEyMjIxMDMz)
 
 ```
 git checkout -- file             ; 丢弃工作区的修改
@@ -46,7 +54,8 @@ git checkout -- file             ; 丢弃工作区的修改
 git reset HEAD <file>            ; 撤销放到暂存区的修改
 ```
 
-
+> revert 回滚 ：只重做某个特定的提交
+>
 
 ========================
 
