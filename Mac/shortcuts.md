@@ -70,5 +70,4 @@ shift + esc: 隐藏工具窗口
 
 `shift + esc`：最小化文档
 
-
-
+`alt + enter`：创建局部变量
