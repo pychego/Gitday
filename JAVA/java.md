@@ -49,6 +49,8 @@ Java数据类型包括基本类型和引用类型
 
 String 属于引用类型，`String`不是关键字
 
+`string.split('/')`这不是静态方法，类似python的这个方法，返回数组
+
 格式化字符串方法: `String.format()`, 使用时翻文档看用法，可以把这个函数当作C语言的`printf()`，足够用了,只是这个函数返回字符串，不会输出
 
 ```java
@@ -116,9 +118,37 @@ System.out.println(total2); // -1474836480
 System.out.println(total3); // 20000000000
 ```
 
-### 变量
+### 集合
 
-#### 变量作用域
+#### ArrayList类
+
+元素会维持加入ArrayList的顺序
+
+类似python中的list，可以动态操作.只能携带对象而不是primitive主数据类型
+
+```java
+ArrayList<Egg> mylist = new ArrayList<Egg>();   // 不定长，这里的Egg就是类型参数，泛型
+// <Egg> 表示创造出的list存放Egg类型的元素,如果不写，默认为Object
+.add(Object elem);   // 向list添加元素
+.remove(int index);  // 移除索引对应的元素
+.contains(Object elem);  // 返回boolen值
+.isEmpty();
+.indexOf(Object elem);  // 返回对象参数的索引或-1
+.size();   // 长度
+.get(int index);   // 返回当前索引对应的元素
+```
+
+HashSet: 集合中不能有重复的元素。
+
+TreeSet：在Hastset的基础上，会一直保持集合处于有序状态，因此类型参数必须实现Comparable接口。
+
+HashMap: 存放键值对， 类似python的dict。
+
+`<>`代表泛型正在使用，里面的内容是类型参数。几乎所有以泛型写的程序都和处理集合有关。
+
+使用泛型的集合类型之间不能强制转换，在编译期间就会报错。以泛型的观点，extend代表extend和implement。
+
+### 变量作用域
 
 **局部变量**：作用域在两个{}之间
 
@@ -149,7 +179,7 @@ static final double PI = 3.14;
 
 两个操作数进行加减乘除，其中一个为double，结果为double， 否则，其中一个为long，结果为long，其余情况都是int
 
-`==` 比较的是栈中两个变量的字节组合是否相同，对于引用类型，== 判断他们是否指向同一对象。因为指向同一对象，在栈中两个变量存放的地址就一样。
+`==` 比较的是栈中两个变量的字节组合是否相同，对于引用类型，== 判断他们是否指向同一对象。因为指向同一对象，在栈中两个变量存放的地址就一样。`equals()`的默认行为是执行==的比较。
 
 ```java
 String a = "abc";
@@ -545,22 +575,6 @@ Arrays.toString();
 Arrays.sort();
 ```
 
-### ArrayList类
-
-类似python中的list，可以动态操作.只能携带对象而不是primitive主数据类型
-
-```java
-ArrayList<Egg> mylist = new ArrayList<Egg>();   // 不定长
-// <Egg> 表示创造出的list存放Egg类型的元素,如果不写，默认为Object
-.add(Object elem);   // 向list添加元素
-.remove(int index);  // 移除索引对应的元素
-.contains(Object elem);  // 返回boolen值
-.isEmpty();
-.indexOf(Object elem);  // 返回对象参数的索引或-1
-.size();   // 长度
-.get(int index);   // 返回当前索引对应的元素
-```
-
 ### Date类和Calendar类
 
 Date类的实例一般用来获取当前时间
@@ -625,3 +639,87 @@ Math.pow()   // 幂运算
 String类型转换为primitive主数据类型用静态方法：`Integer.parseInt()`, `Double.parseDouble`等
 
 primitive主数据类型转换为String，`Integer.toString()`, `Double.toString()`
+
+## 异常处理或声明
+
+当调用有危险的方法（方法声明throws某种异常）时，必须对其进行捕获或声明以便抛出。不然编译都过不了
+
+
+
+### 对象序列化
+
+对象必须实现序列化接口才能被序列化。
+
+当对象被序列化时，被该对象引用的实例变量也会被序列化，且所有被引用的对象也会被序列化。
+
+声明Serializable接口的类可以被序列化，序列化是整个对象版图必须正确的序列化，不然就全部失败。
+
+如果某实例变量不能或者不应该被实例化，可以把它标记成`transient` 瞬时的，这样序列化返回之后该变量会以null或者primitive主类型默认值返回。
+
+将序列化对象写入文件
+
+```java
+FileOutputStream fileStream = new FileOutputStream("MyGame.ser");
+ObjectOutputStream os = new ObjectOutputStram(fileStream);
+os.writaObject(实例)；
+os.close();   // 关闭文件
+```
+
+将字符串写入文本文件
+
+```java
+FileWriter writer = new FileWriter("Foo.txt");
+writer.write("hello, world");
+writer.close();
+```
+
+这里说的序列化和解序列化都是针对堆上的对象，而不是类。
+
+### 从文件中读取数据
+
+```java
+File file = new File("Song.txt");
+FileReader fileReader = new FileReader(file);
+BufferedReader reader = new BufferedReader(fileReader);
+Stirng line = null;
+while ((line=reader.readline()) != null) {
+  System.out.println(line);
+}
+```
+
+File类代表磁盘上的文件，但不是文件中的内容，File本身没有读写文件的方法
+
+FileReader是字符连接到文本文件的串流
+
+BufferedReader 可以提高效率，只有缓冲区为空才会到磁盘读取。
+
+
+
+
+
+## 网络与线程
+
+```java
+Runnable threadJob = new MyRunnable();
+Thread myThread = new Thread(threadJob);  
+// 线程相当于工人，threadJob相当于工人的工作
+myThread.strat();   // 线程开始工作
+```
+
+一旦线程执行完毕就不能再次重新启动。
+
+Runnable 接口只有一个方法，run(),继承的子类子要实现这一个方法，当作线程的任务
+
+在某个线程执行期间调用`Thread.sleep(1000)`可以强迫此线程离开执行状态
+
+在方法前面加上`synchronized`同步化修饰符可以保证同一时间只有一个线程可以进入该方法，保证了动作执行的原子性。
+
+同步化的缺点：
+
+- 同步化会强制线程排队等待执行方法，造成性能损耗
+- 可能会导致死锁
+
+
+
+![image-20210825140650095](/Users/chegopy/Library/Application Support/typora-user-images/image-20210825140650095.png)
+
