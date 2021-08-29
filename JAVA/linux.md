@@ -38,3 +38,9 @@ CentOS Linux release 7.9.2009 (Core)
 1. `rpm -ivh jdk-8u301-linux-x64.rpm` 
 2. 
 
+解压命令
+
+```bash
+tar -zxvf  pycharm-professional-2018.2.5.tar.gz
+```
+
