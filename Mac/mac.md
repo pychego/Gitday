@@ -24,3 +24,13 @@ print(pandas)
 
 
 3. shift + command + . 显示隐藏文件夹
+
+| 快捷键                     | 功能                                  |
+| -------------------------- | ------------------------------------- |
+| command + n                | 新建应用程序窗口                      |
+| command + l                | 在浏览器里面直接定位到地址栏          |
+| command + i                | 显示文件夹简介                        |
+| option + command + h       | 隐藏非活跃程序                        |
+| shift + ctrl + command + 4 | 截屏不保存实体文件，使用command+v粘贴 |
+
+txt文件可以`ln`建立硬链接，md不行
