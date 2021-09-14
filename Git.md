@@ -35,6 +35,8 @@ stage是暂存区
 
 HEAD指针指向当前版本, HEAD^表示上个版本, HEAD^^以此类推
 
+加上`--hard`会把工作区清空。
+
 ```
 git reset --hard HEAD^           ; 回退到上个版本
 git reset --hard <commit id>     ; 回到指定版本
