@@ -1,5 +1,7 @@
 arr为np.array对象
 
+numpy中的一维数组是列向量
+
 axis=0, 表示以行为单位添加或删除； axis=1，表示以列为单位添加或删除
 
 ```python
@@ -102,4 +104,27 @@ arr.max()  arr.min()
 
 
 ![img](https://img-blog.csdnimg.cn/20190828160900248.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzM3NDYxNDE2,size_16,color_FFFFFF,t_70)
+
+
+
+- `np.random.permutation()`
+
+  ```python
+  >>>np.random.permutation(10) 		#  随机排序一个序列
+  array([1, 7, 4, 3, 0, 9, 2, 5, 8, 6])
+  ```
+
+
+```python
+np.ceil(arr)		# 将np对象中的数向上取整
+```
+
+```python
+>>>np.c_[np.array([1,2,3]), np.array([4,5,6])]
+array([[1, 4],
+       [2, 5],
+       [3, 6]])
+>>>np.c_[np.array([[1,2,3]]), 0, 0, np.array([[4,5,6]])]
+array([[1, 2, 3, ..., 4, 5, 6]])
+```
 

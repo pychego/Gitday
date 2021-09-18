@@ -38,3 +38,14 @@ cmd &> output.txt 							# 将stdout和stderr重定向到同一个文件
 `>`以截断文件方式将输出文本保存到文件，即原文件内容会被清空
 
 `>>`以追加方式重定向
+
+`>`等同于`1>`，处理错误时，来自stderr的输出会被丢弃到文件`/dev/null`，一去不返
+
+`cat`即`concatenate`--拼接
+
+```bash
+cat file1 file2 file3 ...     # 将文件内容拼接到一起		
+```
+
+
+

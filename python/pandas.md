@@ -55,13 +55,16 @@ pd.set_option('max_colwidth',100)
   pd.read_excel('xxx', usecols=[])   #usecols的值为一个列表，读取指定列
   ```
 
-- 查看特定行列
+- 数据预览
 
   ```python
   df.head()       #head()不含参数表示读取前5行，带参数100表示读取100行
   df.tail()       #读取最后5行
   df.shape        #返回数据行列数元组
   df.info()       #查看数据类型，每一列有多少NaN，较全面
+  df["省份"].value_counts()    # 查看有多少省份，以及每个省份多少人
+  
+  # 注意，这里面好几个函数需要print才有输出
   ```
 
 - 转换特定列的数据类型
@@ -93,7 +96,7 @@ iloc和loc后面只有一个数时，都是选择的某一行的数据
 
   ```python
   df.loc['行标签']
-  df.iloc[3]        #根据行号选择单行数据，从0开始
+  df.iloc[3]        # 根据行号选择单行数据，从0开始
   ```
 
 - 选择多行数据
@@ -134,14 +137,8 @@ iloc和loc后面只有一个数时，都是选择的某一行的数据
   df['专业'].count_values()
   ```
 
-  
 
 
-- ```
-  df['专业'].count_values()
-  ```
-
-  
 
 ### 修改行标签和列标签
 
@@ -169,6 +166,14 @@ df = df.rename(column={'原行标签': '新标签'...}, inplace=True)
 #### 替换修改
 
 dataframe.apply(function,axis)对一行或一列做出一些操作（axis=1遍历行，axis=0遍历列），可以用匿名函数
+
+```python
+Series.where(condition, other=nan, inplace=False)
+# 如果 condition 为真，保持原来的值，否则替换为other， inplace为真标识在原数据上操作，为False标识在原数据的copy上操作。other的形状必须与self相同。
+# 注意是条件为真保持原来不变
+```
+
+
 
 - 一对一替换
 
@@ -209,18 +214,30 @@ dataframe.apply(function,axis)对一行或一列做出一些操作（axis=1遍�
   df['列名'] = ['元素1'，..]
   ```
 
-- 删除数据（使用drop()方法删除，必须指定要删除的行/列索引）
+  
+
+  ### 数据清洗
+
+  ```python
+  df.dropna(subset=['毕业中学'])		# 放弃这列空白所对应的记录
+  df.drop('毕业中学', axis=1)			  # 放弃有空白值的整个列
+  df['毕业中学'].fillna(value)			# 将空白用特定值填充
+  ```
+
+  
+
+  **删除空白数据**（使用drop()方法删除，必须指定要删除的行/列索引）
 
   `pandas`模块的drop()函数既可以删除指定的行，也可以删除指定的行，注意不改变原对象，而是返回新对象
 
   ```python
-  df.drop(['列名1','列名2'], axis=1)   #axis=1处理列，axis=0处理行
+  df.drop(['列名1','列名2'], axis=1, inplace=True)   # axis=1处理列，axis=0处理行
   df.drop(df.columns[[2,5]], axis=1)
   df.drop(columns=['列名1', '列名2'])
-  #三者功能相同，axis用于指定第一个参数给出的是行标签还是列标签
-  #删除行时，axis参数可以省略
+  # 三者功能相同，axis用于指定第一个参数给出的是行标签还是列标签
+  # 删除行时，axis参数可以省略
   df.drop(index=['行号1', '行号2'])
-  #更实用的方法，删除满足条件元素所在的行
+  # 更实用的方法，删除满足条件元素所在的行
   df = df.drop(df[<some boolean condition>].index)
   df = df.drop(df[df['专业'] == '航空航天类'].index)
   ```
@@ -238,8 +255,6 @@ dataframe.apply(function,axis)对一行或一列做出一些操作（axis=1遍�
   *errors='raise| ignore' :* 是否忽略错误, 默认raise(报错), ignore为跳过错误继续运行
 
   *level* 用于多重index,第几层
-
-- 处理缺失值
 
   在python/pandas中，缺失值一般用NaN表示
 
