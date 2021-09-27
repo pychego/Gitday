@@ -27,6 +27,14 @@ CentOS Linux release 7.9.2009 (Core)
 
 
 
+```shell
+systemctl restart firewalld 	# 重启防火墙，重启服务器之后要弄一下
+```
+
+
+
+
+
 
 
 
