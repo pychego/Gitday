@@ -38,7 +38,7 @@ pd.set_option('max_colwidth',100)
   #header=0表示使用数据表的第0行内容作为列标签
   #index_col=0表示使用数据表的第0列内容作为行标签，默认为None
   #当有多个sheet时，指定None读入所有
-  df = pd.read_csv('xxx.csv')
+  df = pd.read_csv('xxx.csv')  # 默认不加参数即可
   ```
 
 - 显示索引、列
@@ -62,7 +62,7 @@ pd.set_option('max_colwidth',100)
   df.tail()       #读取最后5行
   df.shape        #返回数据行列数元组
   df.info()       #查看数据类型，每一列有多少NaN，较全面
-  df["省份"].value_counts()    # 查看有多少省份，以及每个省份多少人
+  df["省份"].value_counts()    # 查看有多少省份，以及每个省份多少人,返回Series对象
   
   # 注意，这里面好几个函数需要print才有输出
   ```
