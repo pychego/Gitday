@@ -58,12 +58,14 @@ pd.set_option('max_colwidth',100)
 - 数据预览
 
   ```python
-  df.head()       #head()不含参数表示读取前5行，带参数100表示读取100行
+  df.head(n=5)       #head()不含参数表示读取前5行，带参数100表示读取100行
   df.tail()       #读取最后5行
-  df.shape        #返回数据行列数元组
+  df.shape        #返回数据行列数元组,是属性，而不是方法
+  df.dtypes       # 获取每列的类型
   df.info()       #查看数据类型，每一列有多少NaN，较全面
   df["省份"].value_counts()    # 查看有多少省份，以及每个省份多少人,返回Series对象
-  
+  df["省份"].unique()
+  df.describe()   # 获取基本统计量
   # 注意，这里面好几个函数需要print才有输出
   ```
 
@@ -83,7 +85,7 @@ pd.set_option('max_colwidth',100)
 
   - excel_writer :指定文件导出路径与文件名；
   - sheet_name : 指定Sheet名称；
-  - index ：设置是否使用自然数索引，默认使用；一般都是不使用
+  - inindex ：设置是否使用自然数索引，默认使用；一般都是不使用
   - columns : 指定要导出的列；
   - na_rep : 设置缺失值的填充；
   - inf_rep : 设置无穷值inf的填充值
@@ -240,6 +242,7 @@ Series.where(condition, other=nan, inplace=False)
   # 更实用的方法，删除满足条件元素所在的行
   df = df.drop(df[<some boolean condition>].index)
   df = df.drop(df[df['专业'] == '航空航天类'].index)
+  # 注意drop的参数是索引
   ```
 
   df.drop(self, *labels=None*, *axis=0|1*, *index=None, columns=None*, *level=None,* *inplace=False|True, errors='raise| ignore'*)
@@ -264,7 +267,7 @@ Series.where(condition, other=nan, inplace=False)
 
   2. 填充缺失值
 
-     ```
+     ```python
      df.fillna(value=0)     #将缺失值填充为0
      df.fillna({'列名1':0, '列名2':1})    #不同列填充不同的值
      ```
@@ -283,13 +286,13 @@ Series.where(condition, other=nan, inplace=False)
      
   2. 获取唯一值
 
-     ```
+     ```python
      df['列名1'].unique()              #获取指定列数据的唯一值
      ```
   
 - 排序函数
 
-  ```
+  ```python
   #按axis排序
   df.sort_index(axis=1, ascending=False)  
   #按值排序
@@ -300,7 +303,7 @@ Series.where(condition, other=nan, inplace=False)
 
   1. 根据公共列拼接**两个**DataFrame对象,不能一次拼接三个对象
 
-     ```
+     ```python
      a = pd.merge(df1, df2, how=, on='列名')   
      #how='outer'可以指定两表取并集
      #on参数指定合并依据的列，两对象只有一个相同列是不用指出
@@ -308,7 +311,7 @@ Series.where(condition, other=nan, inplace=False)
 
   2. 直接在一个表的后面追加表格
 
-     ```
+     ```python
      e = pd.concat([data1, df2], ignore_index=True)
      #参数为True表示将两个表的行标签合在一起
      f = df.append(df2, ignore_index=)

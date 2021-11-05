@@ -6,6 +6,7 @@
 
 ```
 fig = plt.figure()
+plt.figure(dpi=600)  # 可指定当前脚本的输出图像质量
 ax = fig.add_subplot(1,1,1)  #最后一个参数1代表第一个子图
 ```
 
